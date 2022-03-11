@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppComponent } from 'src/app/app.component';
-
 import { AccountService } from '../../../services/account/account.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
@@ -25,11 +24,27 @@ export class SigninComponent implements OnInit {
     let logIn: SignIn = form.value;
     this.accountService.logIn(logIn).subscribe({
       next: (v) => {
-        let user: User = v;
+        let refresh_token = JSON.parse(JSON.stringify(v)).refresh;
+        let access_token = JSON.parse(JSON.stringify(v)).access;
+        // console.log('SigninComponent: refresh ' + refresh_token);
+        // console.log('SigninComponent: access ' + access_token);
+
+        let user: User = this.appComponent.getCurrentUser();
+        user.access_token = access_token;
+        user.refresh_token = refresh_token;
         this.appComponent.setCurrentUser(user);
-        this.appComponent.saveCurrentUser();
-        this.appComponent.navigate('');
-        this.messageService.clearAll();
+
+        this.accountService.getUserInfo().subscribe({
+          next: (v) => {
+            let user: User = v;
+            user.access_token = access_token;
+            user.refresh_token = refresh_token;
+            this.appComponent.setCurrentUser(user);
+
+            this.appComponent.navigate('');
+            this.messageService.clearAll();
+          }
+        });
       }
     });
   }

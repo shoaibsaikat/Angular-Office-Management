@@ -18,23 +18,35 @@ export class AccountService {
   private common: Common = new Common(this.http);
 
   private baseUrl: string = this.common.getBaseUrl().concat('user/');
-  private logInUrl: string = this.baseUrl.concat('signin/');
+  private logInUrl: string = this.common.getBaseUrl().concat('api/token/');
+  private refreshUrl: string = this.common.getBaseUrl().concat('api/refresh/');
   private logOutUrl: string = this.baseUrl.concat('signout/');
   private profileUrl: string = this.baseUrl.concat('change_profile/');
   private managerUrl: string = this.baseUrl.concat('change_manager/');
   private passwordUrl: string = this.baseUrl.concat('change_password/');
+  private userUrl: string = this.baseUrl.concat('get/');
 
   constructor(private http: HttpClient) { }
 
-  logIn(user: SignIn): Observable<User> {
-    var formData = new FormData();
-    formData.append('username', user.username);
-    formData.append('password', user.password1);
-    return this.http.post<User>(this.logInUrl, formData);
+  logIn(user: SignIn): Observable<string> {
+    return this.http.post<string>(this.logInUrl, {
+      username: user.username,
+      password: user.password1,
+    });
+  }
+
+  getAccessToken(refreshToken: string): Observable<string> {
+    return this.http.post<string>(this.refreshUrl, {
+      refresh: refreshToken,
+    });
   }
 
   logOut(): Observable<Message> {
     return this.http.post<Message>(this.logOutUrl, null, this.common.getHttpHeader());
+  }
+
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>(this.userUrl, this.common.getHttpHeader());
   }
 
   changeInfo(user: User): Observable<Message> {

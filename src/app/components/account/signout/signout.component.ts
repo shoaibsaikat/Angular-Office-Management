@@ -20,10 +20,8 @@ export class SignoutComponent implements OnInit {
   signout(): void  {
     this.accountService.logOut().subscribe(data => {
       // console.log('SignoutComponent: ' + data.detail);
-      this.appComponent.navigate('');
-      this.messageService.clearAll();
+      this.appComponent.logOut();
     });
-    this.appComponent.saveEmptyUser();
   }
 
 }

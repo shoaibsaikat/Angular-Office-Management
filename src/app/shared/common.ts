@@ -19,7 +19,7 @@ export class Common {
         return {
           headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'Authorization': 'Token ' + localStorage.getItem('token')
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
         })}
     }
 
