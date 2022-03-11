@@ -132,12 +132,13 @@ export class GlobalService {
     return this.user;
   }
 
+  // For refreshing token after specified interval
   getNewAccessToken(): Subscription {
     this.tokenSubscription = timer(0, Common.TOKEN_INTERVAL).pipe( 
       map(() => { 
         this.accountService.getAccessToken(this.user.refresh_token || '').subscribe({
           next: (v) => {
-            console.log('getting new token');
+            // console.log('getting new token');
             let access_token = JSON.parse(JSON.stringify(v)).access;
             if (access_token) {
               this.user.access_token = access_token;
