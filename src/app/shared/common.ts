@@ -8,6 +8,7 @@ export class Common {
     static readonly DETAIL_APPROVAL: number = 1;
     static readonly DETAIL_DISTRIBUTION: number = 2;
     static readonly PAGE_SIZE = 10;
+    static readonly TOKEN_INTERVAL: number = 4 * 60 * 1000 + 50 * 1000;
 
     constructor(private http: HttpClient) { }
 

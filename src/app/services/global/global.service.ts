@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+import { Subscription, timer, map } from 'rxjs'; 
+
 import { User } from 'src/app/shared/types/user';
 
 import { MessageService } from '../message/message.service';
+import { AccountService } from '../account/account.service';
+import { Common } from '../../shared/common';
 
 // NOTE: never ever reference or inject AppComponent here, this will create circular dependency
 
@@ -14,15 +18,9 @@ import { MessageService } from '../message/message.service';
 export class GlobalService {
   user: User = this.getEmptyUser();
   errorMsg: string = '';
+  tokenSubscription?: Subscription; 
 
-  constructor(private router: Router, private messageService: MessageService) { }
-
-  reloadCurrentRoute() {
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
-    });
-  }
+  constructor(private router: Router, private messageService: MessageService, private accountService: AccountService) { }
 
   navigate(path: string): void {
     this.router.navigate([path]);
@@ -108,10 +106,6 @@ export class GlobalService {
     this.saveCurrentUser();
   }
 
-  getCurrentUser(): User {
-    return this.user;
-  }
-
   isValidUser(): boolean {
     if (this.user.refresh_token != undefined && this.user.refresh_token != '') {
       return true;
@@ -121,9 +115,9 @@ export class GlobalService {
 
   logOut(): void {
     this.navigate('');
-    // this.reloadCurrentRoute();
     this.messageService.clearAll();
     this.saveEmptyUser();
+    this.unsubscribeAccessToken();
   }
 
   setError(msg: string): void {
@@ -136,6 +130,44 @@ export class GlobalService {
 
   getUser(): User {
     return this.user;
+  }
+
+  getNewAccessToken(): Subscription {
+    this.tokenSubscription = timer(0, Common.TOKEN_INTERVAL).pipe( 
+      map(() => { 
+        this.accountService.getAccessToken(this.user.refresh_token || '').subscribe({
+          next: (v) => {
+            console.log('getting new token');
+            let access_token = JSON.parse(JSON.stringify(v)).access;
+            if (access_token) {
+              this.user.access_token = access_token;
+              this.setCurrentUser(this.user);
+            }
+          }
+        });
+      }) 
+    ).subscribe();
+    return this.tokenSubscription;
+  }
+
+  unsubscribeAccessToken(): void {
+    this.tokenSubscription?.unsubscribe();
+  }
+
+  getUserInfo(): void {
+    this.accountService.getUserInfo().subscribe({
+      next: (v) => {
+        let user: User = v;
+        user.access_token = this.user.access_token;
+        user.refresh_token = this.user.refresh_token;
+        this.setCurrentUser(user);
+
+        this.navigate('');
+        this.clearAllMessage();
+
+        this.getNewAccessToken();
+      }
+    });
   }
 
 }

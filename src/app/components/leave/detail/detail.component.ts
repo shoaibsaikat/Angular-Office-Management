@@ -19,7 +19,7 @@ import { Message } from 'src/app/shared/types/message';
 export class DetailComponent implements OnInit {
 
   leave: Leave = this.leaveService.getEmptyLeave();
-  user: User = this.appComponent.getCurrentUser();
+  user: User = this.appComponent.getUser();
 
   constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
 

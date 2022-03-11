@@ -20,6 +20,9 @@ export class AppComponent {
     private loadingService: LoadingService,
     private globalService: GlobalService) {
     this.globalService.loadCurrentUser();
+    if (this.isValidUser()) {
+      globalService.getNewAccessToken();
+    }
   }
 
   // some functions are just forwared to GlobalService, this is done to make minimal change,
@@ -61,16 +64,13 @@ export class AppComponent {
     this.globalService.setCurrentUser(user);
   }
 
-  getCurrentUser(): User {
-    return this.globalService.getCurrentUser();
-  }
-
   isValidUser(): boolean {
     return this.globalService.isValidUser();
   }
 
   logOut(): void {
     this.globalService.logOut();
+    this.globalService.unsubscribeAccessToken();
   }
 
   getUser(): User {
