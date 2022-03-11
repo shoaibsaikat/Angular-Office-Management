@@ -25,7 +25,7 @@ export class ManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMangerList();
-    this.currentManger = this.appComponent.user.manager_id || -1;
+    this.currentManger = this.appComponent.getUser().manager_id || -1;
     // console.log('ManagerComponent: current ' + this.currentManger);
   }
 
@@ -48,7 +48,7 @@ export class ManagerComponent implements OnInit {
     // console.log('ManagerComponent: selected ' + this.managerForm.value.manager);
     this.accountService.setManger(this.managerForm.value.manager).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
-      this.appComponent.user.manager_id = this.managerForm.value.manager;
+      this.appComponent.getUser().manager_id = this.managerForm.value.manager;
       this.appComponent.saveCurrentUser();
       this.currentManger = this.managerForm.value.manager;
       this.appComponent.navigate('');

@@ -14,7 +14,7 @@ import { User } from 'src/app/shared/types/user';
 })
 
 export class ProfileComponent implements OnInit {
-  user: User = this.appComponent.user;
+  user: User = this.appComponent.getUser();
   profileForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required, ]),
     lastName: new FormControl('', [Validators.required, ]),
@@ -52,9 +52,9 @@ export class ProfileComponent implements OnInit {
 
     this.accountService.changeInfo(user).subscribe(data =>  {
       // console.log('ProfileComponent: ' + data.detail);
-      this.appComponent.user.first_name = user.first_name;
-      this.appComponent.user.last_name = user.last_name;
-      this.appComponent.user.email = user.email;
+      this.appComponent.getUser().first_name = user.first_name;
+      this.appComponent.getUser().last_name = user.last_name;
+      this.appComponent.getUser().email = user.email;
       this.appComponent.saveCurrentUser();
       this.appComponent.navigate('');
     });

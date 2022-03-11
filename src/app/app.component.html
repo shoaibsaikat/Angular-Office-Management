@@ -10,7 +10,7 @@
         <ul class="navbar-nav me-auto"></ul>
         <ul class="navbar-nav" style="margin-right: 1em;">
           <li class="nav-item" *ngIf="isValidUser()">
-            <div class="nav-link"><h5>@<em>{{user.first_name}} {{user.last_name}}</em></h5></div>
+            <div class="nav-link"><h5>@<em>{{getUser().first_name}} {{getUser().last_name}}</em></h5></div>
           </li>
           <li class="nav-item" *ngIf="isValidUser()">
             <app-signout></app-signout>
@@ -47,8 +47,8 @@
             <div class="card-header bg-info bg-opacity-50"><strong>Asset</strong></div>
             <div class="card-body">
               <div class="list-group">
-                  <a *ngIf="user.can_manage_asset" class="nav-link list-group-item" routerLink="/asset/all_list">List</a>
-                  <a *ngIf="user.can_manage_asset" class="nav-link list-group-item" routerLink="/asset/create">Create</a>
+                  <a *ngIf="getUser().can_manage_asset" class="nav-link list-group-item" routerLink="/asset/all_list">List</a>
+                  <a *ngIf="getUser().can_manage_asset" class="nav-link list-group-item" routerLink="/asset/create">Create</a>
                   <a class="nav-link list-group-item" routerLink="/asset/my_list">Mine</a>
                   <a class="nav-link list-group-item" routerLink="/asset/pending_list">Incoming</a>
               </div>
@@ -72,12 +72,12 @@
             <div class="card-header bg-info bg-opacity-50"><strong>Inventory</strong></div>
             <div class="card-body">
               <div class="list-group">
-                  <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/inventory/list">List</a>
-                  <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/requisition/history">History</a>
+                  <a *ngIf="getUser().can_approve_inventory || getUser().can_distribute_inventory" class="nav-link list-group-item" routerLink="/inventory/list">List</a>
+                  <a *ngIf="getUser().can_approve_inventory || getUser().can_distribute_inventory" class="nav-link list-group-item" routerLink="/requisition/history">History</a>
                   <a class="nav-link list-group-item" routerLink="/requisition/create">Request</a>
                   <a class="nav-link list-group-item" routerLink="/requisition/my_list">Mine</a>
-                  <a *ngIf="user.can_approve_inventory" class="nav-link list-group-item" routerLink="/requisition/approval">Incoming</a>
-                  <a *ngIf="user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/requisition/distribution">Distribution</a>
+                  <a *ngIf="getUser().can_approve_inventory" class="nav-link list-group-item" routerLink="/requisition/approval">Incoming</a>
+                  <a *ngIf="getUser().can_distribute_inventory" class="nav-link list-group-item" routerLink="/requisition/distribution">Distribution</a>
               </div>
             </div>
           </div>
@@ -89,8 +89,8 @@
               <div class="list-group">
                 <a class="nav-link list-group-item" routerLink="/leave/create">Apply</a>
                 <a class="nav-link list-group-item" routerLink="/leave/my_list">Mine</a>
-                <a *ngIf="user.can_approve_leave" class="nav-link list-group-item" routerLink="/leave/summary_list">Summary</a>
-                <a *ngIf="user.can_approve_leave" class="nav-link list-group-item" routerLink="/leave/request_list">Incoming</a>
+                <a *ngIf="getUser().can_approve_leave" class="nav-link list-group-item" routerLink="/leave/summary_list">Summary</a>
+                <a *ngIf="getUser().can_approve_leave" class="nav-link list-group-item" routerLink="/leave/request_list">Incoming</a>
               </div>
             </div>
           </div>

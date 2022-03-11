@@ -51,7 +51,7 @@ export class MyListComponent implements OnInit {
         });
 
         userList.forEach(element => {
-          if (element && element.id != this.appComponent.user.id) {
+          if (element && element.id != this.appComponent.getUser().id) {
             this.userList.push(element);
           }
         });

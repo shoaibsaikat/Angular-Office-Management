@@ -4,13 +4,13 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { finalize, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { AppComponent } from '../app.component';
-
 import { Message } from './types/message';
 
+import { GlobalService } from '../services/global/global.service';
 import { MessageService } from '../services/message/message.service';
 import { LoadingService } from '../services/loading/loading.service';
-import { AccountService } from '../services/account/account.service';
+
+// NOTE: never ever inject / import AppComponent here
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +21,9 @@ export class RequestInterceptor implements HttpInterceptor {
   private totalRequests: number = 0;
 
   constructor(
-    private appComponent: AppComponent,
     private messageService: MessageService,
     private loadingService: LoadingService,
-    private accountService: AccountService) { }
+    private globalService: GlobalService) { }
 
   // global http error interceptor
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -48,7 +47,7 @@ export class RequestInterceptor implements HttpInterceptor {
             } else if (error instanceof HttpErrorResponse && error.status == 401) {
               // we're not getting new access token after expire,
               // if we want to implement getting new access token then it should be implemented using some timer
-              this.appComponent.logOut();
+              this.globalService.logOut();
             }
           }, finalize: () => {
             this.totalRequests--;
