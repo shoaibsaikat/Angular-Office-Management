@@ -18,7 +18,7 @@ import { Common } from '../../shared/common';
 export class GlobalService {
   user: User = this.getEmptyUser();
   errorMsg: string = '';
-  tokenSubscription?: Subscription; 
+  tokenSubscription?: Subscription;
 
   constructor(private router: Router, private messageService: MessageService, private accountService: AccountService) { }
 

@@ -75,7 +75,6 @@ import { LoadingComponent } from './components/loading/loading.component';
     GoogleChartsModule
   ],
   providers: [
-    AppComponent,
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
