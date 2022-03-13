@@ -7,6 +7,8 @@ import { User } from './shared/types/user';
 import { GlobalService } from './services/global/global.service';
 import { LoadingService } from './services/loading/loading.service';
 
+// NOTE: never ever inject / import AppComponent somewhere else
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

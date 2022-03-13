@@ -10,8 +10,6 @@ import { MessageService } from '../message/message.service';
 import { AccountService } from '../account/account.service';
 import { Common } from '../../shared/common';
 
-// NOTE: never ever reference or inject AppComponent here, this will create circular dependency
-
 @Injectable({
   providedIn: 'root'
 })

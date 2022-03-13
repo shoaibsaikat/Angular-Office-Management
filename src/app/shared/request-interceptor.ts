@@ -10,8 +10,6 @@ import { GlobalService } from '../services/global/global.service';
 import { MessageService } from '../services/message/message.service';
 import { LoadingService } from '../services/loading/loading.service';
 
-// NOTE: never ever inject / import AppComponent here
-
 @Injectable({
   providedIn: 'root',
 })
