@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AppComponent } from 'src/app/app.component';
-
 import { GlobalService } from 'src/app/services/global/global.service';
 import { AccountService } from '../../../services/account/account.service';
 import { MessageService } from 'src/app/services/message/message.service';
@@ -18,7 +16,6 @@ import { User } from 'src/app/shared/types/user';
 export class SigninComponent implements OnInit {
 
   constructor(
-    private appComponent: AppComponent,
     private globalService: GlobalService,
     private accountService: AccountService,
     private messageService: MessageService) { }
@@ -35,10 +32,10 @@ export class SigninComponent implements OnInit {
         // console.log('SigninComponent: refresh ' + refresh_token);
         // console.log('SigninComponent: access ' + access_token);
 
-        let user: User = this.appComponent.getUser();
+        let user: User = this.globalService.getUser();
         user.access_token = access_token;
         user.refresh_token = refresh_token;
-        this.appComponent.setCurrentUser(user);
+        this.globalService.setCurrentUser(user);
 
         this.globalService.getUserInfo();
       }

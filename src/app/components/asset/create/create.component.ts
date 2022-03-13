@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AssetService } from 'src/app/services/asset/asset.service';
-import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-create',
@@ -34,7 +34,7 @@ export class CreateComponent implements OnInit {
   statusList: Map<number, string> = new Map<number, string>();
   typeList: Map<number, string> = new Map<number, string>();
 
-  constructor(private assetService: AssetService, private appComponent: AppComponent) { }
+  constructor(private assetService: AssetService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.assetService.getAddInfo().subscribe({
@@ -76,7 +76,7 @@ export class CreateComponent implements OnInit {
 
     this.assetService.createAsset(asset).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
-      this.appComponent.navigate('');
+      this.globalService.navigate('');
     });
     console.log('CreateComponent: ' + asset.description + ', ' + asset.status + ', ' + asset.type + ', ' + asset.warranty + ', ' + asset.purchaseDate);
   }

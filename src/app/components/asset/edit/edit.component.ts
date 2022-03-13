@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AssetService } from 'src/app/services/asset/asset.service';
-import { AppComponent } from 'src/app/app.component';
 
 import { Asset } from 'src/app/shared/types/asset';
 
@@ -30,7 +30,7 @@ export class EditComponent implements OnInit {
 
   statusList: Map<number, string> = new Map<number, string>();
 
-  constructor(private activatedRoute: ActivatedRoute, private assetService: AssetService, private appComponent: AppComponent) { }
+  constructor(private activatedRoute: ActivatedRoute, private assetService: AssetService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
 
@@ -71,7 +71,7 @@ export class EditComponent implements OnInit {
 
     this.assetService.updateAsset(asset).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
-      this.appComponent.navigate('asset/all_list');
+      this.globalService.navigate('asset/all_list');
     });
     // console.log('EditComponent: ' + asset.description + ', ' + asset.status + ', ' + asset.warranty);
   }

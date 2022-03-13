@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { InventoryService } from 'src/app/services/inventory/inventory.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Message } from '../../../shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
@@ -28,7 +27,7 @@ export class CreateComponent implements OnInit {
   get count() { return this.inventoryForm.get('count'); }
   get description() { return this.inventoryForm.get('description'); }
 
-  constructor(private inventoryService: InventoryService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private inventoryService: InventoryService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
   }
@@ -45,7 +44,7 @@ export class CreateComponent implements OnInit {
     this.inventoryService.createInventoryItem(item).subscribe(data => {
       let msg: Message = JSON.parse(JSON.stringify(data));
       this.messageService.add(msg.detail);
-      this.appComponent.navigate('/inventory/list');
+      this.globalService.navigate('/inventory/list');
     });
 
   }

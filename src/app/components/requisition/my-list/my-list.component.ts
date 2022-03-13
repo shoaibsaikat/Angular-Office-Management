@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { RequisitionService } from 'src/app/services/requisition/requisition.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Requisition } from 'src/app/shared/types/requisition';
 import { Common } from 'src/app/shared/common';
@@ -22,7 +21,7 @@ export class MyListComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
 
-  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.updateMyList();
@@ -48,7 +47,7 @@ export class MyListComponent implements OnInit {
 
   onClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
-    this.appComponent.navigate('requisition/detail/' + Common.DETAIL_NORMAL);
+    this.globalService.navigate('requisition/detail/' + Common.DETAIL_NORMAL);
   }
 
   onFirstClick(): void {

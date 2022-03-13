@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { LeaveService } from 'src/app/services/leave/leave.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Leave } from 'src/app/shared/types/leave';
 import { Message } from 'src/app/shared/types/message';
@@ -23,7 +22,7 @@ export class RequestListComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
 
-  constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private leaveService: LeaveService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.getLeaveRequestList();
@@ -49,7 +48,7 @@ export class RequestListComponent implements OnInit {
 
   onItemSelected(item: Leave): void {
     this.leaveService.setCurrentLeave(item);
-    this.appComponent.navigate('leave/detail');
+    this.globalService.navigate('leave/detail');
   }
 
   onApprove(index: number): void {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { AppComponent } from 'src/app/app.component';
-
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AccountService } from 'src/app/services/account/account.service';
 
 import { User } from 'src/app/shared/types/user';
@@ -14,7 +13,7 @@ import { User } from 'src/app/shared/types/user';
 })
 
 export class ProfileComponent implements OnInit {
-  user: User = this.appComponent.getUser();
+  user: User = this.globalService.getUser();
   profileForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required, ]),
     lastName: new FormControl('', [Validators.required, ]),
@@ -25,7 +24,7 @@ export class ProfileComponent implements OnInit {
   get lastName() { return this.profileForm.get('lastName'); }
   get email() { return this.profileForm.get('email'); }
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
+  constructor(private globalService: GlobalService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.firstName?.setValue(this.user.first_name);
@@ -52,11 +51,11 @@ export class ProfileComponent implements OnInit {
 
     this.accountService.changeInfo(user).subscribe(data =>  {
       // console.log('ProfileComponent: ' + data.detail);
-      this.appComponent.getUser().first_name = user.first_name;
-      this.appComponent.getUser().last_name = user.last_name;
-      this.appComponent.getUser().email = user.email;
-      this.appComponent.saveCurrentUser();
-      this.appComponent.navigate('');
+      this.globalService.getUser().first_name = user.first_name;
+      this.globalService.getUser().last_name = user.last_name;
+      this.globalService.getUser().email = user.email;
+      this.globalService.saveCurrentUser();
+      this.globalService.navigate('');
     });
   }
 }

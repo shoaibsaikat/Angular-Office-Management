@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { InventoryService } from 'src/app/services/inventory/inventory.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Message } from 'src/app/shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
@@ -27,7 +26,7 @@ export class ListComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
 
-  constructor(private inventoryService: InventoryService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private inventoryService: InventoryService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.updateInventoryList();
@@ -78,7 +77,7 @@ export class ListComponent implements OnInit {
 
   onClick(item: Inventory): void {
     this.inventoryService.setCurrentInventory(item);
-    this.appComponent.navigate('inventory/edit');
+    this.globalService.navigate('inventory/edit');
   }
 
   onFirstClick(): void {

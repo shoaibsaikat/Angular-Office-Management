@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { RequisitionService } from 'src/app/services/requisition/requisition.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
-import { AppComponent } from 'src/app/app.component';
-
-import { Message } from '../../../shared/types/message';
 import { User } from 'src/app/shared/types/user';
 import { Inventory } from 'src/app/shared/types/inventory';
 
@@ -34,7 +32,7 @@ export class CreateComponent implements OnInit {
   inventoryList: Map<number, string> = new Map<number, string>();
   approverList: Map<number, string> = new Map<number, string>();
 
-  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.requisitionService.getAddInfo().subscribe({
@@ -60,7 +58,7 @@ export class CreateComponent implements OnInit {
 
   onSubmit(): void {
     this.requisitionService.createRequisition(this.title?.value, this.inventory?.value, this.approver?.value, this.amount?.value, this.comment?.value).subscribe(data => {
-      this.appComponent.navigate('requisition/my_list');
+      this.globalService.navigate('requisition/my_list');
     });
   }
 

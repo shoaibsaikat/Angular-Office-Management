@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl, FormArray, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 
-import { AppComponent } from 'src/app/app.component';
-
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AccountService } from '../../../services/account/account.service';
 
 @Component({
@@ -23,7 +22,7 @@ export class PasswordComponent implements OnInit {
   get newPassword1() { return this.passwordForm.get('newPassword1'); }
   get newPassword2() { return this.passwordForm.get('newPassword2'); }
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
+  constructor(private globalService: GlobalService, private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
@@ -35,7 +34,7 @@ export class PasswordComponent implements OnInit {
 
     this.accountService.setPassword(this.passwordForm.value.oldPassword, this.passwordForm.value.newPassword1).subscribe(data =>  {
       // console.log('PasswordComponent: ' + data.detail);
-      this.appComponent.navigate('');
+      this.globalService.navigate('');
     });
   }
 

@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { InventoryService } from 'src/app/services/inventory/inventory.service';
-import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Inventory } from 'src/app/shared/types/inventory';
 
@@ -28,10 +25,8 @@ export class EditComponent implements OnInit {
   get description() { return this.inventoryForm.get('description'); }
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private inventoryService: InventoryService,
-    private messageService: MessageService,
-    private appComponent: AppComponent) { }
+    private globalService: GlobalService) { }
 
   ngOnInit(): void {
     let item = this.inventoryService.getCurrentInventory();
@@ -53,7 +48,7 @@ export class EditComponent implements OnInit {
     // console.log('EditComponent: item.name: ' + this.name?.value);
     this.inventoryService.updateInventory(item).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
-      this.appComponent.navigate('inventory/list');
+      this.globalService.navigate('inventory/list');
     });
 
   }

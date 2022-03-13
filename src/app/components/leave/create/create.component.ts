@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { LeaveService } from 'src/app/services/leave/leave.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
-import { AppComponent } from 'src/app/app.component';
-
 import { Message } from '../../../shared/types/message';
-import { Leave } from 'src/app/shared/types/leave';
 
 @Component({
   selector: 'app-create',
@@ -30,12 +28,12 @@ export class CreateComponent implements OnInit {
 
   days: number = 0;
 
-  constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private leaveService: LeaveService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.leaveService.getLeaveCreationData().subscribe({
         next: (v) => { }, error: (e) => {
-          this.appComponent.navigate('account/manager');
+          this.globalService.navigate('account/manager');
         }, complete: () => { }
     });
   }
@@ -72,7 +70,7 @@ export class CreateComponent implements OnInit {
     this.leaveService.createLeave(leave).subscribe(data => {
       let msg: Message = JSON.parse(JSON.stringify(data));
       this.messageService.add(msg.detail);
-      this.appComponent.navigate('/leave/my_list');
+      this.globalService.navigate('/leave/my_list');
     });
 
   }

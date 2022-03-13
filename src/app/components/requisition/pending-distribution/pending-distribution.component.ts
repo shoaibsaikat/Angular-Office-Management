@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { RequisitionService } from 'src/app/services/requisition/requisition.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Common } from 'src/app/shared/common';
 import { Requisition } from 'src/app/shared/types/requisition';
@@ -22,7 +21,7 @@ export class PendingDistributionComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
 
-  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.updateDistributionList();
@@ -47,12 +46,12 @@ export class PendingDistributionComponent implements OnInit {
 
   onDetailClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
-    this.appComponent.navigate('requisition/detail/' + Common.DETAIL_DISTRIBUTION);
+    this.globalService.navigate('requisition/detail/' + Common.DETAIL_DISTRIBUTION);
   }
 
   onApproveClick(index: number): void {
     this.requisitionService.distribute(this.requisitionList[index].id).subscribe(data => {
-      this.appComponent.navigate('requisition/distribution');
+      this.globalService.navigate('requisition/distribution');
       this.requisitionList.splice(index, 1);
     });
   }

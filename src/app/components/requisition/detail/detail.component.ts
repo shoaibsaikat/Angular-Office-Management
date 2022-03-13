@@ -4,9 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { RequisitionService } from 'src/app/services/requisition/requisition.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Common } from 'src/app/shared/common';
 import { User } from 'src/app/shared/types/user';
@@ -28,7 +27,7 @@ export class DetailComponent implements OnInit {
   requisition?: Requisition;
   distributorList: User[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private requisitionService: RequisitionService, private appComponent: AppComponent) {
+  constructor(private activatedRoute: ActivatedRoute, private requisitionService: RequisitionService, private globalService: GlobalService) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.state = Number(params.get('state'));
     });
@@ -50,11 +49,11 @@ export class DetailComponent implements OnInit {
   onClick(): void {
     if (this.isApproval() && this.requisition && this.distributor) {
       this.requisitionService.approve(this.requisition.id, this.distributor.value).subscribe(data => {
-        this.appComponent.navigate('requisition/approval');
+        this.globalService.navigate('requisition/approval');
       });
     } else if (this.isDistribution() && this.requisition) {
       this.requisitionService.distribute(this.requisition.id).subscribe(data => {
-        this.appComponent.navigate('requisition/distribution');
+        this.globalService.navigate('requisition/distribution');
       });
     }
   }

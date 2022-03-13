@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { RequisitionService } from 'src/app/services/requisition/requisition.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { Requisition } from 'src/app/shared/types/requisition';
 import { User } from 'src/app/shared/types/user';
@@ -26,7 +25,7 @@ export class PendingApprovalComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
 
-  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private requisitionService: RequisitionService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.updateApprovalList();
@@ -66,7 +65,7 @@ export class PendingApprovalComponent implements OnInit {
   onDetailClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
     this.requisitionService.setDistributorList(this.distributorList);
-    this.appComponent.navigate('requisition/detail/' + Common.DETAIL_APPROVAL);
+    this.globalService.navigate('requisition/detail/' + Common.DETAIL_APPROVAL);
   }
 
   onApproveClick(index: number): void {

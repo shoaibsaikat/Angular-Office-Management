@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AssetService } from 'src/app/services/asset/asset.service';
 import { MessageService } from 'src/app/services/message/message.service';
-
-import { AppComponent } from 'src/app/app.component';
 
 import { User } from '../../../shared/types/user';
 import { Message } from '../../../shared/types/message';
@@ -28,7 +27,7 @@ export class MyListComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
 
-  constructor(private assetService: AssetService, private messageService: MessageService, private appComponent: AppComponent) { }
+  constructor(private assetService: AssetService, private messageService: MessageService, private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.updateMyList();
@@ -51,7 +50,7 @@ export class MyListComponent implements OnInit {
         });
 
         userList.forEach(element => {
-          if (element && element.id != this.appComponent.getUser().id) {
+          if (element && element.id != this.globalService.getUser().id) {
             this.userList.push(element);
           }
         });

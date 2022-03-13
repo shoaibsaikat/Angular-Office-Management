@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { ChartType } from 'angular-google-charts';
 
+import { GlobalService } from 'src/app/services/global/global.service';
 import { InventoryService } from 'src/app/services/inventory/inventory.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
-import { AppComponent } from 'src/app/app.component';
-
-import { Message } from 'src/app/shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
 
 @Component({
@@ -25,7 +23,7 @@ export class HomeComponent implements OnInit {
   // width = 800;
   height = 500;
 
-  constructor(private inventoryService: InventoryService, private messageService: MessageService, private appComponent: AppComponent) {
+  constructor(private inventoryService: InventoryService, private messageService: MessageService, private globalService: GlobalService) {
     this.getData();
   }
 

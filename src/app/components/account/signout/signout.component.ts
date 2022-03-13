@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { AppComponent } from 'src/app/app.component';
-
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AccountService } from '../../../services/account/account.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
@@ -12,7 +11,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 })
 export class SignoutComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService, private messageService: MessageService) { }
+  constructor(private globalService: GlobalService, private accountService: AccountService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -20,7 +19,7 @@ export class SignoutComponent implements OnInit {
   signout(): void  {
     this.accountService.logOut().subscribe(data => {
       // console.log('SignoutComponent: ' + data.detail);
-      this.appComponent.logOut();
+      this.globalService.logOut();
     });
   }
 

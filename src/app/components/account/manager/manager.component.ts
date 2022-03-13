@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { AppComponent } from 'src/app/app.component';
-
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AccountService } from '../../../services/account/account.service';
 
 import { User } from 'src/app/shared/types/user';
@@ -21,11 +20,11 @@ export class ManagerComponent implements OnInit {
   });
   currentManger: number = -1;
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
+  constructor(private globalService: GlobalService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getMangerList();
-    this.currentManger = this.appComponent.getUser().manager_id || -1;
+    this.currentManger = this.globalService.getUser().manager_id || -1;
     // console.log('ManagerComponent: current ' + this.currentManger);
   }
 
@@ -48,10 +47,10 @@ export class ManagerComponent implements OnInit {
     // console.log('ManagerComponent: selected ' + this.managerForm.value.manager);
     this.accountService.setManger(this.managerForm.value.manager).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
-      this.appComponent.getUser().manager_id = this.managerForm.value.manager;
-      this.appComponent.saveCurrentUser();
+      this.globalService.getUser().manager_id = this.managerForm.value.manager;
+      this.globalService.saveCurrentUser();
       this.currentManger = this.managerForm.value.manager;
-      this.appComponent.navigate('');
+      this.globalService.navigate('');
     });
   }
 
