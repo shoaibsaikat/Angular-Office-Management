@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
       next: (v) => {
         // console.log('HomeComponent: ' + JSON.stringify(v));
         this.data = [];
-        let objInventoryList: Inventory[] = JSON.parse(JSON.parse(JSON.stringify(v)).inventory_list);
+        let objInventoryList: Inventory[] = JSON.parse(JSON.stringify(v));
         objInventoryList.forEach(element => {
           if (element) {
             let tmp = [];
