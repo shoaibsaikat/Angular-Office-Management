@@ -18,7 +18,7 @@ export class AccountService {
   private common: Common = new Common(this.http);
 
   private baseUrl: string = this.common.getBaseUrl().concat('user/');
-  private logInUrl: string = this.common.getBaseUrl().concat('token/');
+  private logInUrl: string = this.baseUrl.concat('login/');
   private refreshUrl: string = this.common.getBaseUrl().concat('token/refresh/');
   private logOutUrl: string = this.baseUrl.concat('signout/');
   private profileUrl: string = this.baseUrl.concat('change_profile/');
