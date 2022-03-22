@@ -19,7 +19,7 @@ export class AccountService {
 
   private baseUrl: string = this.common.getBaseUrl().concat('user/');
   private logInUrl: string = this.baseUrl.concat('login/');
-  private refreshUrl: string = this.common.getBaseUrl().concat('token/refresh/');
+  // private refreshUrl: string = this.common.getBaseUrl().concat('token/refresh/');
   private logOutUrl: string = this.baseUrl.concat('signout/');
   private profileUrl: string = this.baseUrl.concat('change_profile/');
   private managerUrl: string = this.baseUrl.concat('change_manager/');
@@ -35,11 +35,11 @@ export class AccountService {
     });
   }
 
-  getAccessToken(refreshToken: string): Observable<string> {
-    return this.http.post<string>(this.refreshUrl, {
-      refresh: refreshToken,
-    });
-  }
+  // getAccessToken(refreshToken: string): Observable<string> {
+  //   return this.http.post<string>(this.refreshUrl, {
+  //     refresh: refreshToken,
+  //   });
+  // }
 
   logOut(): Observable<Message> {
     return this.http.post<Message>(this.logOutUrl, null, this.common.getHttpHeader());

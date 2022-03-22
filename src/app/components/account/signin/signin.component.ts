@@ -27,13 +27,12 @@ export class SigninComponent implements OnInit {
     let logIn: SignIn = form.value;
     this.accountService.logIn(logIn).subscribe({
       next: (v) => {
-		console.log(JSON.stringify(v));
-
+		    // console.log(JSON.stringify(v));
         let refresh_token = JSON.parse(JSON.stringify(v)).refresh;
         let access_token = JSON.parse(JSON.stringify(v)).access;
 		
-        console.log('SigninComponent: refresh ' + refresh_token);
-        console.log('SigninComponent: access ' + access_token);
+        // console.log('SigninComponent: refresh ' + refresh_token);
+        // console.log('SigninComponent: access ' + access_token);
 
         let user: User = this.globalService.getUser();
         user.access_token = access_token;

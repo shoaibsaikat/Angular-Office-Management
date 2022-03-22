@@ -22,9 +22,9 @@ export class AppComponent {
     private loadingService: LoadingService,
     private globalService: GlobalService) {
     this.globalService.loadCurrentUser();
-    if (this.isValidUser()) {
-      globalService.getNewAccessToken();
-    }
+    // if (this.isValidUser()) {
+    //   globalService.getNewAccessToken();
+    // }
   }
 
   // some functions are just forwared to GlobalService, this is done to make minimal change,

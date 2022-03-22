@@ -131,23 +131,23 @@ export class GlobalService {
   }
 
   // For refreshing token after specified interval
-  getNewAccessToken(): Subscription {
-    this.tokenSubscription = timer(0, Common.TOKEN_INTERVAL).pipe( 
-      map(() => { 
-        this.accountService.getAccessToken(this.user.refresh_token || '').subscribe({
-          next: (v) => {
-            // console.log('getting new token');
-            let access_token = JSON.parse(JSON.stringify(v)).access;
-            if (access_token) {
-              this.user.access_token = access_token;
-              this.setCurrentUser(this.user);
-            }
-          }
-        });
-      }) 
-    ).subscribe();
-    return this.tokenSubscription;
-  }
+  // getNewAccessToken(): Subscription {
+  //   this.tokenSubscription = timer(0, Common.TOKEN_INTERVAL).pipe(
+  //     map(() => {
+  //       this.accountService.getAccessToken(this.user.refresh_token || '').subscribe({
+  //         next: (v) => {
+  //           // console.log('getting new token');
+  //           let access_token = JSON.parse(JSON.stringify(v)).access;
+  //           if (access_token) {
+  //             this.user.access_token = access_token;
+  //             this.setCurrentUser(this.user);
+  //           }
+  //         }
+  //       });
+  //     })
+  //   ).subscribe();
+  //   return this.tokenSubscription;
+  // }
 
   unsubscribeAccessToken(): void {
     this.tokenSubscription?.unsubscribe();
@@ -156,6 +156,7 @@ export class GlobalService {
   getUserInfo(): void {
     this.accountService.getUserInfo().subscribe({
       next: (v) => {
+        // console.log('GlobalService: ' + JSON.stringify(v));
         let user: User = v;
         user.access_token = this.user.access_token;
         user.refresh_token = this.user.refresh_token;
@@ -164,7 +165,7 @@ export class GlobalService {
         this.navigate('');
         this.clearAllMessage();
 
-        this.getNewAccessToken();
+        // this.getNewAccessToken();
       }
     });
   }
