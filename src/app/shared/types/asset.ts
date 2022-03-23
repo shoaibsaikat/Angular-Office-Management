@@ -6,7 +6,7 @@ export interface Asset {
     user: number;
     user_first_name: string;
     user_last_name: string;
-    next_user: number;
+    next_user?: number;
     purchase_date: string;
     warranty: number;
     type: number;

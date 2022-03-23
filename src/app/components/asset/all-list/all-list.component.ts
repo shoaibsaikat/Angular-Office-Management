@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AssetService } from 'src/app/services/asset/asset.service';
 
 import { Asset } from 'src/app/shared/types/asset';
-import { AssetViewModel } from 'src/app/shared/types/asset-view-model';
+import { AssetViewModel } from 'src/app/shared/types/asset_viewmodel';
 
 import { Common } from 'src/app/shared/common';
 
@@ -33,27 +33,32 @@ export class AllListComponent implements OnInit {
     this.assetService.getAllAssetList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
-        let assetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
-        let statusList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
-        let typeList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).type);
-        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        let assetList: Asset[] = JSON.parse(JSON.stringify(v)).asset_list;
+        let statusObj: any = JSON.parse(JSON.stringify(v)).status;
+        let typeObj: any = JSON.parse(JSON.stringify(v)).type;
+        this.listCount = JSON.parse(JSON.stringify(v)).count;
         this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
-        statusList.forEach(element => {
-          if (element) {
-            let status = element.toString().split(',');
-            // console.log('AllListComponent: ' + status[0] + ': ' + status[1] + '\n');
-            this.statusList.set(Number(status[0]), status[1]);
+        let i: number = 0;
+        while(true) {
+          if (statusObj[i]) {
+            // console.log(statusObj[i]);
+            this.statusList.set(i, statusObj[i]);
+          } else {
+            break;
           }
-        });
-
-        typeList.forEach(element => {
-          if (element) {
-            let type = element.toString().split(',');
-            // console.log('AllListComponent: ' + type[0] + ': ' + type[1] + '\n');
-            this.typeList.set(Number(type[0]), type[1]);
+          i++;
+        }
+        i = 0;
+        while(true) {
+          if (typeObj[i]) {
+            // console.log(typeObj[i]);
+            this.typeList.set(i, typeObj[i]);
+          } else {
+            break;
           }
-        });
+          i++;
+        }
 
         assetList.forEach(element => {
           if (element) {

@@ -36,7 +36,7 @@ export class MyListComponent implements OnInit {
   updateMyList(): void {
     this.assetService.getMyAssetList(this.currentPage).subscribe({
       next: (v) => {
-        // console.log('MyListComponent: ' + JSON.stringify(v));
+        console.log('MyListComponent: ' + JSON.stringify(v));
         let userList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).user_list);
         let assetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
         this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
@@ -45,7 +45,7 @@ export class MyListComponent implements OnInit {
         assetList.forEach(element => {
           if (element) {
             this.assetList.push(element);
-            console.log('MyListComponent: id ' + element.id + ':' + element.user + ':' + element.next_user + ','  + element.name);
+            // console.log('MyListComponent: id ' + element.id + ':' + element.user + ':' + element.next_user + ','  + element.name);
           }
         });
 
