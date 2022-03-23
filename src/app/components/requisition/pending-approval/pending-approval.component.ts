@@ -35,9 +35,9 @@ export class PendingApprovalComponent implements OnInit {
     this.requisitionService.getApprovalList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('ListComponent: ' + JSON.stringify(v));
-        let requisitionList: Requisition[] = JSON.parse(JSON.parse(JSON.stringify(v)).requisition_list);
-        let distributorList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).distributor_list);
-        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        let requisitionList: Requisition[] = JSON.parse(JSON.stringify(v)).requisition_list;
+        let distributorList: User[] = JSON.parse(JSON.stringify(v)).distributor_list;
+        this.listCount = JSON.parse(JSON.stringify(v)).count;
         this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         requisitionList.forEach(element => {

@@ -40,8 +40,8 @@ export class CreateComponent implements OnInit {
     this.assetService.getAddInfo().subscribe({
       next: (v) => {
         // console.log('CreateComponent: ' + JSON.stringify(v));
-        let objStatusList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
-        let objTypeList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).type);
+        let objStatusList: string[] = JSON.parse(JSON.stringify(v)).status;
+        let objTypeList: string[] = JSON.parse(JSON.stringify(v)).type;
 
         objStatusList.forEach(element => {
           if (element) {

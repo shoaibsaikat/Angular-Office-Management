@@ -37,8 +37,8 @@ export class SummaryComponent implements OnInit {
     this.leaveService.getLeaveSummaryList(this.selectedYear, this.currentPage).subscribe({
       next: (v) => {
         // console.log('SummaryComponent: ' + JSON.stringify(v));
-        let leaveList: LeaveSummary[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
-        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        let leaveList: LeaveSummary[] = JSON.parse(JSON.stringify(v)).leave_list;
+        this.listCount = JSON.parse(JSON.stringify(v)).count;
         this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         this.leaveList = [];

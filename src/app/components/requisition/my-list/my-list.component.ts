@@ -31,8 +31,8 @@ export class MyListComponent implements OnInit {
     this.requisitionService.getMyRequisitionList(this.currentPage).subscribe({
       next: (v) => {
         //console.log('MyListComponent: ' + JSON.stringify(v));
-        let requisitionList: Requisition[] = JSON.parse(JSON.parse(JSON.stringify(v)).requisition_list);
-        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        let requisitionList: Requisition[] = JSON.parse(JSON.stringify(v)).requisition_list;
+        this.listCount = JSON.parse(JSON.stringify(v)).count;
         this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         requisitionList.forEach(element => {

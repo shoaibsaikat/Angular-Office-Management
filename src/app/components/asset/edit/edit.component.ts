@@ -41,8 +41,8 @@ export class EditComponent implements OnInit {
         this.assetService.getEditInfo(this.id).subscribe({
           next: (v) => {
             // console.log('EditComponent: ' + JSON.stringify(v));
-            let objAsset: Asset = JSON.parse(JSON.parse(JSON.stringify(v)).asset);
-            let objStatusList: [{}] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
+            let objAsset: Asset = JSON.parse(JSON.stringify(v)).asset;
+            let objStatusList: [{}] = JSON.parse(JSON.stringify(v)).status;
             // console.log('EditComponent: ' + JSON.stringify(objAsset));
             objStatusList.forEach(element => {
               if (element) {

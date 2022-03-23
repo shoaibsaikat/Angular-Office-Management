@@ -31,8 +31,8 @@ export class PendingListComponent implements OnInit {
     this.assetService.getPendingAssetList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
-        let assetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
-        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        let assetList: Asset[] = JSON.parse(JSON.stringify(v)).asset_list;
+        this.listCount = JSON.parse(JSON.stringify(v)).count;
         this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         assetList.forEach(element => {

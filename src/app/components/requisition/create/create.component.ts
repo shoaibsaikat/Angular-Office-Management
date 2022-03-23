@@ -38,8 +38,8 @@ export class CreateComponent implements OnInit {
     this.requisitionService.getAddInfo().subscribe({
       next: (v) => {
         // console.log('CreateComponent: ' + JSON.stringify(v));
-        let inventoryList: Inventory[] = JSON.parse(JSON.parse(JSON.stringify(v)).inventory_list);
-        let approverList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).approver_list);
+        let inventoryList: Inventory[] = JSON.parse(JSON.stringify(v)).inventory_list;
+        let approverList: User[] = JSON.parse(JSON.stringify(v)).approver_list;
 
         inventoryList.forEach(element => {
           if (element) {
