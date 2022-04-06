@@ -112,10 +112,10 @@ export class GlobalService {
   }
 
   logOut(): void {
-    this.navigate('');
+    this.unsubscribeAccessToken();
     this.messageService.clearAll();
     this.saveEmptyUser();
-    this.unsubscribeAccessToken();
+    this.navigate('');
   }
 
   setError(msg: string): void {

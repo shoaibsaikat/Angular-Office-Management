@@ -42,15 +42,17 @@ export class EditComponent implements OnInit {
           next: (v) => {
             // console.log('EditComponent: ' + JSON.stringify(v));
             let objAsset: Asset = JSON.parse(JSON.stringify(v)).asset;
-            let objStatusList: [{}] = JSON.parse(JSON.stringify(v)).status;
+            let objStatusList: any = JSON.parse(JSON.stringify(v)).status;
             // console.log('EditComponent: ' + JSON.stringify(objAsset));
-            objStatusList.forEach(element => {
-              if (element) {
-                let status = element.toString().split(',');
-                // console.log('EditComponent: ' + status[0] + ': ' + status[1] + '\n');
-                this.statusList.set(Number(status[0]), status[1]);
+            // console.log('EditComponent: ' + JSON.stringify(objStatusList));
+            // parsing status list
+            var i = 0;
+            while(true) {
+              if (objStatusList[i] == null || objStatusList[i] == undefined) {
+                break;
               }
-            });
+              this.statusList.set(i, objStatusList[i++]);
+            }
             this.name?.setValue(objAsset.name);
             this.warranty?.setValue(objAsset.warranty);
             this.description?.setValue(objAsset.description);
