@@ -48,8 +48,8 @@ export class PendingListComponent implements OnInit {
   onApprove(item: number, index: number): void {
     // console.log('PendingListComponent: onApprove() ' + item);
     this.assetService.approvePendingAsset(item).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg: string = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg);
 
       // update local data
       this.assetList.splice(index, 1);
@@ -59,8 +59,8 @@ export class PendingListComponent implements OnInit {
   onDecline(item: number, index: number): void {
     // console.log('PendingListComponent: onDecline() ' + item);
     this.assetService.declinePendingAsset(item).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg: string = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg);
 
       // update local data
       this.assetList.splice(index, 1);

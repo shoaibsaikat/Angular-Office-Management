@@ -20,7 +20,7 @@
                         <td>{{item.model}}</td>
                         <td>{{item.serial}}</td>
                         <td>{{item.purchase_date|date}}</td>
-                        <td *ngIf="!item.next_user" >
+                        <td *ngIf="!item.next_user">
                             <form [formGroup]="assignFormList[i]" class="row" (ngSubmit)="onSubmit(i)">
                                 <div class="col-md-7">
                                     <select class="form-select" formControlName="user">
