@@ -40,24 +40,29 @@ export class CreateComponent implements OnInit {
     this.assetService.getAddInfo().subscribe({
       next: (v) => {
         // console.log('CreateComponent: ' + JSON.stringify(v));
-        let objStatusList: string[] = JSON.parse(JSON.stringify(v)).status;
-        let objTypeList: string[] = JSON.parse(JSON.stringify(v)).type;
+        let statusObj: any = JSON.parse(JSON.stringify(v)).status;
+        let typeObj: any = JSON.parse(JSON.stringify(v)).type;
 
-        objStatusList.forEach(element => {
-          if (element) {
-            let status = element.toString().split(',');
-            // console.log('CreateComponent: ' + status[0] + ': ' + status[1] + '\n');
-            this.statusList.set(Number(status[0]), status[1]);
+        let i: number = 0;
+        while(true) {
+          if (statusObj[i]) {
+            // console.log(statusObj[i]);
+            this.statusList.set(i, statusObj[i]);
+          } else {
+            break;
           }
-        });
-
-        objTypeList.forEach(element => {
-          if (element) {
-            let type = element.toString().split(',');
-            // console.log('CreateComponent: ' + type[0] + ': ' + type[1] + '\n');
-            this.typeList.set(Number(type[0]), type[1]);
+          i++;
+        }
+        i = 0;
+        while(true) {
+          if (typeObj[i]) {
+            // console.log(typeObj[i]);
+            this.typeList.set(i, typeObj[i]);
+          } else {
+            break;
           }
-        });
+          i++;
+        }
       }
     });
   }
