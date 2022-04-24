@@ -36,14 +36,20 @@ export class ListComponent implements OnInit {
     this.inventoryService.getInventoryList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('ListComponent: ' + JSON.stringify(v));
-        let objInventoryList: Inventory[] = JSON.parse(JSON.parse(JSON.stringify(v)).inventory_list);
-        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        let inventoryList: Inventory[] = JSON.parse(JSON.stringify(v)).inventory_list;
+        this.listCount = JSON.parse(JSON.stringify(v)).count;
         this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
-        objInventoryList.forEach(element => {
+        inventoryList.forEach(element => {
           if (element) {
-            this.inventoryList.push(element);
-            // console.log('ListComponent: id ' + element.id + ':' + element.name);
+            let inventory: Inventory = {
+              id: element.id,
+              name: element.name,
+              unit: element.unit,
+              count: element.count
+            }
+            this.inventoryList.push(inventory);
+            // console.log('AllListComponent: id:' + assetViewModel.id + ', user:' + element.user, ', status:' + assetViewModel.status);
           }
         });
 
