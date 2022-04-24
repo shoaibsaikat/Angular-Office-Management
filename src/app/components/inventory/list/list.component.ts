@@ -70,8 +70,9 @@ export class ListComponent implements OnInit {
   onSubmit(index: number): void {
     // console.log('ListComponent: index: ' + index + ': ' + this.inventoryFormList[index].get('count')?.value);
     this.inventoryService.inventoryQuickUpdate(this.inventoryList[index].id, this.inventoryFormList[index].get('count')?.value).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg);
+      console.log(msg);
       // update local data
       this.inventoryList[index].count = this.inventoryFormList[index].get('count')?.value;
     });
