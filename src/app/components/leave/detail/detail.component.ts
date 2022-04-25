@@ -6,7 +6,6 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { Leave } from '../../../shared/types/leave';
 import { User } from 'src/app/shared/types/user';
-import { Message } from 'src/app/shared/types/message';
 
 @Component({
   selector: 'app-detail',
@@ -27,8 +26,8 @@ export class DetailComponent implements OnInit {
   onApprove(): void {
     // console.log('RequestListComponent: index: ' + index + ': ' + this.leaveList[index].title);
     this.leaveService.approveLeave(this.leave.id).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg.text);
       // update local data
       this.leave = this.leaveService.getEmptyLeave();
     });

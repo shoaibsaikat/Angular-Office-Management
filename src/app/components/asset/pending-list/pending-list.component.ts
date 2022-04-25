@@ -4,7 +4,6 @@ import { AssetService } from 'src/app/services/asset/asset.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
 import { Asset } from 'src/app/shared/types/asset';
-import { Message } from 'src/app/shared/types/message';
 import { Common } from 'src/app/shared/common';
 
 @Component({

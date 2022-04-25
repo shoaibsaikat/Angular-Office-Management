@@ -6,8 +6,6 @@ import { GlobalService } from 'src/app/services/global/global.service';
 import { LeaveService } from 'src/app/services/leave/leave.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
-import { Message } from '../../../shared/types/message';
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -68,8 +66,8 @@ export class CreateComponent implements OnInit {
       comment: this.comment?.value,
     }
     this.leaveService.createLeave(leave).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg.text);
       this.globalService.navigate('/leave/my_list');
     });
 

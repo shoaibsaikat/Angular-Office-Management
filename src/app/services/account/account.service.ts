@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 
 import { User } from '../../shared/types/user';
 import { SignIn } from '../../shared/types/signin';
-import { Message } from '../../shared/types/message';
 import { Common } from '../../shared/common';
 
 
@@ -41,16 +40,16 @@ export class AccountService {
   //   });
   // }
 
-  logOut(): Observable<Message> {
-    return this.http.post<Message>(this.logOutUrl, null, this.common.getHttpHeader());
+  logOut(): Observable<string> {
+    return this.http.post<string>(this.logOutUrl, null, this.common.getHttpHeader());
   }
 
   getUserInfo(): Observable<User> {
     return this.http.get<User>(this.userUrl, this.common.getHttpHeader());
   }
 
-  changeInfo(user: User): Observable<Message> {
-    return this.http.post<Message>(this.profileUrl, {
+  changeInfo(user: User): Observable<string> {
+    return this.http.post<string>(this.profileUrl, {
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email || '',
@@ -61,14 +60,14 @@ export class AccountService {
     return this.http.get<string>(this.managerUrl, this.common.getHttpHeader());
   }
 
-  setManger(id: number): Observable<Message> {
-    return this.http.post<Message>(this.managerUrl, {
+  setManger(id: number): Observable<string> {
+    return this.http.post<string>(this.managerUrl, {
       manager: id,
     }, this.common.getHttpHeader());
   }
 
-  setPassword(last_pass: string, new_pass: string): Observable<Message> {
-    return this.http.post<Message>(this.passwordUrl, {
+  setPassword(last_pass: string, new_pass: string): Observable<string> {
+    return this.http.post<string>(this.passwordUrl, {
       lastpassword: last_pass,
       newpassword: new_pass,
     }, this.common.getHttpHeader());

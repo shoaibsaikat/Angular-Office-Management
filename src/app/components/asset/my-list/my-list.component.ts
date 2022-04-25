@@ -7,7 +7,6 @@ import { AssetService } from 'src/app/services/asset/asset.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
 import { User } from '../../../shared/types/user';
-import { Message } from '../../../shared/types/message';
 import { Asset } from 'src/app/shared/types/asset';
 import { Common } from 'src/app/shared/common';
 

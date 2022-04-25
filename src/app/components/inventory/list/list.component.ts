@@ -6,7 +6,6 @@ import { GlobalService } from 'src/app/services/global/global.service';
 import { InventoryService } from 'src/app/services/inventory/inventory.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
-import { Message } from 'src/app/shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
 import { Common } from 'src/app/shared/common';
 
@@ -71,8 +70,8 @@ export class ListComponent implements OnInit {
     // console.log('ListComponent: index: ' + index + ': ' + this.inventoryFormList[index].get('count')?.value);
     this.inventoryService.inventoryQuickUpdate(this.inventoryList[index].id, this.inventoryFormList[index].get('count')?.value).subscribe(data => {
       let msg = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg);
-      console.log(msg);
+      this.messageService.add(msg.text);
+      // console.log(msg);
       // update local data
       this.inventoryList[index].count = this.inventoryFormList[index].get('count')?.value;
     });

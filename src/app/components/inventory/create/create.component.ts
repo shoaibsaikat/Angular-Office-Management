@@ -6,7 +6,6 @@ import { GlobalService } from 'src/app/services/global/global.service';
 import { InventoryService } from 'src/app/services/inventory/inventory.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
-import { Message } from '../../../shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
 
 @Component({
@@ -42,8 +41,8 @@ export class CreateComponent implements OnInit {
     }
     // console.log('CreateComponent: item.name: ' + this.name?.value);
     this.inventoryService.createInventoryItem(item).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg.text);
       this.globalService.navigate('/inventory/list');
     });
 

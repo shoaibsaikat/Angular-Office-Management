@@ -5,7 +5,6 @@ import { LeaveService } from 'src/app/services/leave/leave.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
 import { Leave } from 'src/app/shared/types/leave';
-import { Message } from 'src/app/shared/types/message';
 import { Common } from 'src/app/shared/common';
 
 @Component({
@@ -54,8 +53,8 @@ export class RequestListComponent implements OnInit {
   onApprove(index: number): void {
     // console.log('RequestListComponent: index: ' + index + ': ' + this.leaveList[index].title);
     this.leaveService.approveLeave(this.leaveList[index].id).subscribe(data => {
-      let msg: Message = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.detail);
+      let msg = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg.text);
       // update local data
       this.leaveList.splice(index, 1);
     });

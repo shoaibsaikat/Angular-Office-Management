@@ -4,8 +4,6 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { finalize, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Message } from './types/message';
-
 import { GlobalService } from '../services/global/global.service';
 import { MessageService } from '../services/message/message.service';
 import { LoadingService } from '../services/loading/loading.service';
@@ -33,14 +31,17 @@ export class RequestInterceptor implements HttpInterceptor {
           error: (error) => {
             // console.log('RequestInterceptor: ' + error.status);
             if (error instanceof HttpErrorResponse && error.status != 401) {
-              let msg: Message = JSON.parse(JSON.stringify(error.error));
+              let msg = JSON.parse(JSON.stringify(error.error));
               this.messageService.clearError();
-              if (msg.detail && msg.detail.length > 0) {
-                this.messageService.addError(msg.detail);
-                // console.log('RequestInterceptor: ' +  msg.detail);
+              if (msg && msg.text && msg.text.length > 0 && error.status == 200) {
+                // success
+                this.messageService.add(msg.text);
+              } else if (msg && msg.text && msg.text.length > 0) {
+                this.messageService.addError(msg.text);
+                // console.log('RequestInterceptor: ' +  msg);
               } else {
                 // system error
-                this.messageService.addError(error.status + ': ' + error.name + ', ' + error.statusText);
+                this.messageService.addError(error.status + ': ' + error.name);
               }
             } else if (error instanceof HttpErrorResponse && error.status == 401) {
               // Unathorized
