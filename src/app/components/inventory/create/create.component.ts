@@ -39,10 +39,10 @@ export class CreateComponent implements OnInit {
       unit: this.unit?.value,
       description: this.description?.value,
     }
-    // console.log('CreateComponent: item.name: ' + this.name?.value);
     this.inventoryService.createInventoryItem(item).subscribe(data => {
+      // console.log('CreateComponent: item.name: ' + data);
       let msg = JSON.parse(JSON.stringify(data));
-      this.messageService.add(msg.text);
+      this.messageService.add(msg);
       this.globalService.navigate('/inventory/list');
     });
 
