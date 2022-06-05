@@ -34,7 +34,16 @@ export class EditComponent implements OnInit {
     this.name = item.name;
     this.unit = item.unit;
     this.inventoryForm.get('count')?.setValue(item.count);
-    this.inventoryForm.get('description')?.setValue(item.description);
+
+    this.inventoryService.getEditInfo(this.id).subscribe({
+      next: (v) => {
+        // console.log('EditComponent: ' + JSON.stringify(v));
+        let description: string = JSON.parse(JSON.stringify(v)).description;
+        // console.log('EditComponent: ' + description);
+        this.inventoryForm.get('description')?.setValue(description);
+      }
+    });
+
   }
 
   onSubmit(): void {
