@@ -10,7 +10,7 @@ import { AllListComponent } from './components/asset/all-list/all-list.component
 import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
 import { EditComponent as AssetEditComponent } from './components/asset/edit/edit.component';
 import { CreateComponent as AssetCreateComponent } from './components/asset/create/create.component';
-import { ListComponent } from './components/inventory/list/list.component';
+import { ListComponent as InventoryListComponent } from './components/inventory/list/list.component';
 import { CreateComponent as InventoryCreateComponent } from './components/inventory/create/create.component';
 import { EditComponent as InventoryEditComponent } from './components/inventory/edit/edit.component';
 import { HistoryComponent } from './components/requisition/history/history.component';
@@ -25,6 +25,8 @@ import { RequestListComponent as LeaveRequestListComponent } from './components/
 import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
 import { CreateComponent as LeaveCreateComponent } from './components/leave/create/create.component';
 import { ListComponent as DriverListComponent } from './components/driver/list/list.component';
+import { CreateComponent as DriverCreateComponent } from './components/driver/create/create.component';
+import { EditComponent as DriverEditComponent } from './components/driver/edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,7 +39,7 @@ const routes: Routes = [
   { path: 'asset/pending_list', component: PendingListComponent },
   { path: 'asset/create', component: AssetCreateComponent },
   { path: 'asset/edit/:id', component: AssetEditComponent },
-  { path: 'inventory/list', component: ListComponent },
+  { path: 'inventory/list', component: InventoryListComponent },
   { path: 'inventory/create', component: InventoryCreateComponent },
   { path: 'inventory/edit', component: InventoryEditComponent },
   { path: 'requisition/history', component: HistoryComponent },
@@ -52,6 +54,8 @@ const routes: Routes = [
   { path: 'leave/summary_list', component: LeaveSummaryComponent },
   { path: 'leave/create', component: LeaveCreateComponent },
   { path: 'driver/list', component: DriverListComponent },
+  { path: 'driver/create', component: DriverCreateComponent },
+  { path: 'driver/edit', component: DriverEditComponent },
 ];
 
 @NgModule({
