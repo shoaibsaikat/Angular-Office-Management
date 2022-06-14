@@ -36,6 +36,8 @@ import { CreateComponent as LeaveCreateComponent } from './components/leave/crea
 import { LoadingComponent } from './components/loading/loading.component';
 import { BarComponent } from './components/bar/bar.component';
 import { ListComponent as DriverListComponent } from './components/driver/list/list.component';
+import { CreateComponent as DriverCreateComponent } from './components/driver/create/create.component';
+import { EditComponent as DriverEditComponent } from './components/driver/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { ListComponent as DriverListComponent } from './components/driver/list/l
     LoadingComponent,
     BarComponent,
     DriverListComponent,
+    DriverCreateComponent,
+    DriverEditComponent,
   ],
   imports: [
     BrowserModule,
