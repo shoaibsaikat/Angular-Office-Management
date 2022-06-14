@@ -34,6 +34,8 @@ import { RequestListComponent as LeaveRequestListComponent } from './components/
 import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
 import { CreateComponent as LeaveCreateComponent } from './components/leave/create/create.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { BarComponent } from './components/bar/bar.component';
+import { ListComponent as DriverListComponent } from './components/driver/list/list.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     LeaveSummaryComponent,
     LeaveCreateComponent,
     LoadingComponent,
+    BarComponent,
+    DriverListComponent,
   ],
   imports: [
     BrowserModule,
