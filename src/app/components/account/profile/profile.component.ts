@@ -47,6 +47,10 @@ export class ProfileComponent implements OnInit {
       'first_name': first.trim(),
       'last_name': last.trim(),
       'email': email.trim(),
+      'type': 0,
+      'phone1': 0,
+      'phone2': 0,
+      'image': '',
     }
 
     this.accountService.changeInfo(user).subscribe(data =>  {

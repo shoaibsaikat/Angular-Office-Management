@@ -30,6 +30,10 @@ export class GlobalService {
       first_name: '',
       last_name: '',
       username: '',
+      type: 0,
+      phone1: 0,
+      phone2: 0,
+      image: '',
     };
   }
 
