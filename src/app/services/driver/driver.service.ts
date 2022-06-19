@@ -13,10 +13,17 @@ export class DriverService {
 
   private common: Common = new Common(this.http);
 
-  // private currentDriver: User = {
-  //   id: 0,
-  //   username: '',
-  // };
+  private currentDriver: User = {
+    'id': 0,
+    'username': '',
+    'first_name': '',
+    'last_name': '',
+    'email': '',
+    'type': 0,
+    'phone1': 0,
+    'phone2': 0,
+    'image': '',
+  };
 
   private baseUrl: string = this.common.getBaseUrl().concat('driver/');
   private listUrl: string = this.baseUrl.concat('list/');
@@ -27,4 +34,13 @@ export class DriverService {
     let listUrl = this.listUrl.concat('?page=' + page);
     return this.http.get<string>(listUrl, this.common.getHttpHeader());
   }
+
+  setCurrentDriver(item: User): void {
+    this.currentDriver = item;
+  }
+
+  getCurrentDriver(): User {
+    return this.currentDriver;
+  }
+
 }

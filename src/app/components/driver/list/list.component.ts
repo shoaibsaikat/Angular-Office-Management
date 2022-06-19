@@ -18,7 +18,6 @@ import { Common } from 'src/app/shared/common';
 export class ListComponent implements OnInit {
 
   driverList: User[] = [];
-  // driverFormList: FormGroup[] = [];
 
   // pagination, NOTE: pagination is by 10 in server side and can't be set from client
   listCount: number = 0;
@@ -45,29 +44,14 @@ export class ListComponent implements OnInit {
             // console.log('ListComponent: id ' + element.id + ':' + element.username);
           }
         });
-
-        // generate form groups
-        // this.driverList.forEach(element => {
-        //   this.driverFormList.push(new FormGroup({
-        //     count: new FormControl(),
-        //   }));
-        // });
-        // set driver count to form
-        // this.driverFormList.forEach((element, i) => {
-        //   element.get('count')?.setValue(this.driverList[i].count);
-        // });
       }
     });
   }
 
-  // checkDriverCount(index: number): boolean {
-  //   return false ? this.driverFormList[index].get('count')?.value >= 0 : true;
-  // }
-
-  // onClick(item: Driver): void {
-  //   this.driverService.setCurrentDriver(item);
-  //   this.globalService.navigate('driver/edit');
-  // }
+  onClick(item: User): void {
+    this.driverService.setCurrentDriver(item);
+    this.globalService.navigate('driver/edit');
+  }
 
   onFirstClick(): void {
     this.currentPage = 1;
