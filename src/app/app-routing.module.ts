@@ -25,8 +25,9 @@ import { RequestListComponent as LeaveRequestListComponent } from './components/
 import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
 import { CreateComponent as LeaveCreateComponent } from './components/leave/create/create.component';
 import { ListComponent as DriverListComponent } from './components/driver/list/list.component';
-import { CreateComponent as DriverCreateComponent } from './components/driver/create/create.component';
 import { EditComponent as DriverEditComponent } from './components/driver/edit/edit.component';
+import { RouteCreateComponent } from './components/driver/route-create/route-create.component';
+import { RouteListComponent } from './components/driver/route-list/route-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,8 +55,9 @@ const routes: Routes = [
   { path: 'leave/summary_list', component: LeaveSummaryComponent },
   { path: 'leave/create', component: LeaveCreateComponent },
   { path: 'driver/list', component: DriverListComponent },
-  { path: 'driver/create', component: DriverCreateComponent },
   { path: 'driver/edit', component: DriverEditComponent },
+  { path: 'driver/route_create', component: RouteCreateComponent },
+  { path: 'driver/route_list', component: RouteListComponent },
 ];
 
 @NgModule({
