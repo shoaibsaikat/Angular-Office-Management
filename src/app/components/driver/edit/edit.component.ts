@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { GlobalService } from 'src/app/services/global/global.service';
+import { DriverService } from 'src/app/services/driver/driver.service';
+
+import { User } from 'src/app/shared/types/user';
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -7,9 +14,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  driver:User = this.driverService.getCurrentDriver();
+
+  driverForm: FormGroup = new FormGroup({
+    phone1: new FormControl('', [Validators.required, ]),
+    phone2: new FormControl('', []),
+    description: new FormControl(),
+  });
+  get phone1() { return this.driverForm.get('phone1'); }
+  get phone2() { return this.driverForm.get('phone2'); }
+
+  constructor(
+    private driverService: DriverService,
+    private globalService: GlobalService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    this.driver.phone1 = this.phone1?.value;
+    this.driver.phone2 = this.phone2?.value;
+    console.log('EditComponent: phone 1: ' + this.phone1?.value);
+    this.driverService.updateDriver(this.driver).subscribe(data => {
+      // console.log('ManagerComponent: ' + data.detail);
+      this.globalService.navigate('driver/list');
+    });
+
   }
 
 }

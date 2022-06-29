@@ -27,6 +27,7 @@ export class DriverService {
 
   private baseUrl: string = this.common.getBaseUrl().concat('driver/');
   private listUrl: string = this.baseUrl.concat('list/');
+  private editUrl: string = this.baseUrl.concat('edit/');
 
   constructor(private http: HttpClient) { }
 
@@ -41,6 +42,15 @@ export class DriverService {
 
   getCurrentDriver(): User {
     return this.currentDriver;
+  }
+
+  updateDriver(item: User): Observable<string> {
+    let editItemUrl: string = this.editUrl.concat(item.id + '/');
+    return this.http.post<string>(editItemUrl, {
+      phone1: item.phone1,
+      phone2: item.phone2,
+      image: '',
+    }, this.common.getHttpHeader());
   }
 
 }

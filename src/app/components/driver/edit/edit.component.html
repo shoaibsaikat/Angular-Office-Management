@@ -1,1 +1,18 @@
-<p>edit works!</p>
+<div class="row">
+    <h3>{{driver.first_name}} {{driver.last_name}}</h3>
+    <br><br><br>
+    <form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="phone1" class="form-label">Phone 1</label>
+          <input type="text" class="form-control" id="phone1" formControlName="phone1" required>
+          <div *ngIf="phone1?.invalid && (phone1?.dirty || phone1?.touched)" class="alert alert-danger">
+            <div *ngIf="phone1?.errors?.required">Phone 1 is required.</div>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="phone2" class="form-label">Phone 2</label>
+            <input type="text" class="form-control" id="phone2" formControlName="phone2" required>
+          </div>
+        <button type="submit" class="btn btn-cyan" [disabled]="phone1?.errors">Save</button>
+    </form>
+</div>
