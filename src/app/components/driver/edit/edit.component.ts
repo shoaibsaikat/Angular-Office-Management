@@ -19,10 +19,12 @@ export class EditComponent implements OnInit {
   driverForm: FormGroup = new FormGroup({
     phone1: new FormControl('', [Validators.required, ]),
     phone2: new FormControl('', []),
+    image: new FormControl('', []),
     description: new FormControl(),
   });
   get phone1() { return this.driverForm.get('phone1'); }
   get phone2() { return this.driverForm.get('phone2'); }
+  get image() { return this.driverForm.get('image'); }
 
   constructor(
     private driverService: DriverService,
@@ -30,6 +32,10 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.driverForm.get('phone1')?.setValue('0' + this.driver.phone1);
+    if (this.driver.phone2) {
+      this.driverForm.get('phone2')?.setValue('0' + this.driver.phone2);
+    }
   }
 
   onSubmit(): void {
